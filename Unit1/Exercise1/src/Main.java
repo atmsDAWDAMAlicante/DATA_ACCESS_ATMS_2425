@@ -1,93 +1,111 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.lang.*;
+import java.util.ArrayList;
+
 public class Main {
 
-    // Fields
-    private String name;
-    private int grade;
-
-    //Methods
-    public String getName(){
-        return name;
-    }
-    public void setName(String value){
-        name = value;
-    }
-
-    public int getGrade(){
-        return grade;
-    }
-    public void setGrade(int value){
-        grade = value;
-    }
-
-    public boolean Passed(int value)
-    {
-        if (value >= 5){
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
-
-    // Main method
     public static void main(String[] args) {
 
-        Main example = new Main();
-        example.setName("Luis García");
-        example.setGrade(5);
+        Student LuisGarcia = new Student("Luis García", 5);
+        Student ManoloPerez = new Student("Manolo Pérez", 2);
+        Student MariaLopez = new Student("María López", 7);
 
-        System.out.println("Nota de " + example.getName());
-        System.out.println(example.getGrade());
-        System.out.println("Aprobado: " + example.Passed(example.getGrade()));
+        System.out.println("Nota de " + LuisGarcia.getName() + " " + LuisGarcia.getGrade() + " Passed: " + LuisGarcia.Passed(LuisGarcia.getGrade()));
+        System.out.println("Nota de " + ManoloPerez.getName() + " " + ManoloPerez.getGrade() + " Passed: " + ManoloPerez.Passed(ManoloPerez.getGrade()));
+
+        Students Classroom = new Students();
+        Classroom.setStudentsList(LuisGarcia);
+        Classroom.setStudentsList(ManoloPerez);
+        Classroom.setStudentsList(MariaLopez);
+        System.out.println("The classroom has " + Classroom.getStudentsList() + " student/s");
+        System.out.println("Who is the no. 1?: " + Classroom.studentAtPosition(1) + "... and, who is the no. 5?: " + Classroom.studentAtPosition(5));
+        System.out.println("Average: " + Classroom.averageGrade());
     }
 
-    // pendiente de pasr de C# a Java
+}
+    class Student {
 
-    /*
-	private ArrayList listaAlumnos = new ArrayList();
+        // Fields
+        private String name;
+        private int grade;
 
-	// Agrega un nuevo alumno a la lista
-	//
-	public void Agregar(Alumno alu)
-	{
-		listaAlumnos.Add(alu);
-	}
+        // Constructor
+        public Student(String name, int grade) {
+            this.name = name;
+            this.grade = grade;
+        }
 
-	// Devuelve el alumno que está en la posición num
-	//
-	public Alumno Obtener(int num)
-	{
-		if (num >= 0 && num <= listaAlumnos.Count)
-		{
-			return ((Alumno)listaAlumnos[num]);
-		}
-		return null;
-	}
+        // Getters && Setters
+        public String getName() {
+            return name;
+        }
 
-	// Devuelve la nota media de los alumnos
-	//
-	public float Media
-	{
-		get
-		{
-			if (listaAlumnos.Count == 0)
-				return 0;
-			else
-			{
-				float media = 0;
-				for (int i = 0; i < listaAlumnos.Count; i++)
-				{
-					media += ((Alumno)listaAlumnos[i]).Nota;
-				}
-				return (media / listaAlumnos.Count);
-			}
-		}
-	}
+        public void setName(String value) {
+            name = value;
+        }
+
+        public int getGrade() {
+            return grade;
+        }
+
+        public void setGrade(int value) {
+            grade = value;
+        }
+
+        //Methods
+        public boolean Passed(int value) {
+            if (value >= 5) { // Why IntelliJ says "simplify"?
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+    }
 
 
-     */
+class Students {
+
+    // Fields
+    private ArrayList<Student> studentsList = new ArrayList(); // Why IntelliJ says that may be 'final'?
+
+    // Getters && Setters
+    public int getStudentsList() {
+        // No length, no count
+        return studentsList.size();
+    }
+
+    public void setStudentsList(Student oneStudent) {
+        studentsList.add(oneStudent);
+    }
+
+    //Methods
+
+    public String studentAtPosition(int position) {
+        if (position > 0 && position <= studentsList.size()) {
+            // Warning: get(int) don't use array[int]
+            // .getName() to return a string
+            return studentsList.get(position).getName();
+        } else return null;
+    }
+
+    public float averageGrade()
+
+    {
+        float average = 0;
+        if (studentsList.size() == 0) { // studentsList.isEmpty()
+            return 0;
+        } else {
+            for (int i = 0; i < studentsList.size(); i++) {
+                average += studentsList.get(i).getGrade();
+            }
+            return (average / studentsList.size());
+        }
+    }
 
 }
+
+
+
+
+
+
