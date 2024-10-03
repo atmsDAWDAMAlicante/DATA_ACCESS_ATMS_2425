@@ -1,15 +1,90 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.lang.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        Employee employeeOfTheMonth = new Employee("Francisco José", 1975, 12.25f);
+        System.out.println(employeeOfTheMonth.showDataOfPerson());
+
+
+
+    }
+
+}
+
+// Class Person
+class Person{
+    protected String name;
+    protected int bornYear;
+    protected int age;
+    protected Calendar today = new GregorianCalendar();
+
+    // Constructor
+    Person(String name, int bornYear) {
+        this.name = name;
+        this.bornYear = bornYear;
+    }
+
+
+    // Getters and setters
+    public String getName(){
+        return name;
+    }
+
+    public void setName(String value){
+        name = value;
+    }
+
+    public int getAge(){
+        age = today.get(Calendar.YEAR) - this.bornYear;
+        return age;
+    }
+
+    public void setBornYear(int value){
+        bornYear = value;
+
+    }
+
+    // Method Show data
+    public String showDataOfPerson(){
+        return "Name: " + this.name + " - Age: " + getAge();
+    }
+
+}
+
+class Employee extends Person{
+    private float salary;
+
+    public Employee(String name, int bornYear, float salary) {
+       super(name, bornYear);
+        this.salary = salary;
+    }
+    @Override
+    public String showDataOfPerson(){
+        return "Name: " + this.name + " - Age: " + getAge() + " - salary: " + this.salary;
     }
 }
+
+
+
+
+class Executive extends Employee {
+    private String category;
+    public Executive(String name, int bornYear, float salary, String category) {
+        super(name, bornYear, salary);  // Llamada al constructor de Employee
+        this.category = category;
+    }
+}
+
+class Customer{
+
+}
+
+    class Company{
+        public ArrayList<Customer> customers = new ArrayList<>();
+
+
+    }
