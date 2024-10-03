@@ -66,7 +66,7 @@ public class Main {
 class Students {
 
     // Fields
-    private ArrayList<Student> studentsList = new ArrayList(); // Why IntelliJ says that may be 'final'?
+    private final ArrayList<Student> studentsList = new ArrayList<>(); // Why IntelliJ says that may be 'final'?
 
     // Getters && Setters
     public int getStudentsList() {
